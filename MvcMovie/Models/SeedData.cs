@@ -23,38 +23,82 @@ namespace MvcMovie.Models
                 context.Movie.AddRange(
                     new Movie
                     {
-                        Title = "When Harry Met Sally",
-                        ReleaseDate = DateTime.Parse("1989-2-12"),
-                        Genre = "Romantic Comedy",
-                        Price = 7.99M,
-                        Rating = "R"
+                        Title = "Legacy",
+                        ReleaseDate = DateTime.Parse("1993-3-7"),
+                        Genre = "Drama",
+                        Price = 11.75M,
+                        Rating = "G",
+                        ImagePath = "legacy.jpg"
                     },
 
                     new Movie
                     {
-                        Title = "Ghostbusters ",
-                        ReleaseDate = DateTime.Parse("1984-3-13"),
+                        Title = "Meet the Mormons",
+                        ReleaseDate = DateTime.Parse("2014-10-10"),
+                        Genre = "Documentary",
+                        Price = 6.68M,
+                        Rating = "PG",
+                        ImagePath = "meet_the_mormons.jpg"
+                    },
+
+                    new Movie
+                    {
+                        Title = "The Saratov Approach",
+                        ReleaseDate = DateTime.Parse("2013-10-9"),
+                        Genre = "Action",
+                        Price = 26.94M,
+                        Rating = "PG-13",
+                        ImagePath = "the_saratov_approach.jpg"
+                    },
+
+                    new Movie
+                    {
+                        Title = "The Other Side of Heaven",
+                        ReleaseDate = DateTime.Parse("2002-4-12"),
+                        Genre = "Adventure",
+                        Price = 11.99M,
+                        Rating = "PG",
+                        ImagePath = "the_other_side_of_heaven.jpg"
+                    },
+
+                    new Movie
+                    {
+                        Title = "The Other Side of Heaven 2: Fire of Faith",
+                        ReleaseDate = DateTime.Parse("2019-6-30"),
+                        Genre = "Adventure",
+                        Price = 11.99M,
+                        Rating = "PG-13",
+                        ImagePath = "the_other_side_of_heaven_2.jpg"
+                    },
+
+                    new Movie
+                    {
+                        Title = "17 Miracles",
+                        ReleaseDate = DateTime.Parse("2011-6-3"),
+                        Genre = "History",
+                        Price = 12.30M,
+                        Rating = "PG",
+                        ImagePath = "17_miracles.jpg"
+                    },
+
+                    new Movie
+                    {
+                        Title = "The Best Two Years",
+                        ReleaseDate = DateTime.Parse("2004-2-20"),
                         Genre = "Comedy",
-                        Price = 8.99M,
-                        Rating = "G"
+                        Price = 32.73M,
+                        Rating = "PG",
+                        ImagePath = "the_best_two_years.jpg"
                     },
 
                     new Movie
                     {
-                        Title = "Ghostbusters 2",
-                        ReleaseDate = DateTime.Parse("1986-2-23"),
+                        Title = "The Singles Ward",
+                        ReleaseDate = DateTime.Parse("2002-1-30"),
                         Genre = "Comedy",
-                        Price = 9.99M,
-                        Rating = "G"
-                    },
-
-                    new Movie
-                    {
-                        Title = "Rio Bravo",
-                        ReleaseDate = DateTime.Parse("1959-4-15"),
-                        Genre = "Western",
-                        Price = 3.99M,
-                        Rating = "NA"
+                        Price = 19.75M,
+                        Rating = "PG",
+                        ImagePath = "the_singles_ward.jpg"
                     }
                 );
                 context.SaveChanges();

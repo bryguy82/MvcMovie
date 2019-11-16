@@ -1,0 +1,25 @@
+﻿footer.text-muted,
+body header nav a.text-dark,
+body header nav a.navbar-brand {
+    color: #eae0c8 !important;
+}
+
+body header nav.bg-white,
+html footer {
+    background-color: #382633 !important;
+}
+
+html body {
+    background-color: #6A8EAE;
+}
+
+html body a:active,
+html body a:visited,
+html body a:link {
+    color: #eae0c8;
+    text-decoration:none;
+}
+
+html body a:hover {
+    color: #ffffff;
+}

@@ -11,6 +11,10 @@ namespace MvcMovie.Controllers
 {
     public class HomeController : Controller
     {
+        private int dateYear = DateTime.Now.Year;
+        private String name = "Bryan Anderson";
+        private String country = "Brazil";
+
         private readonly ILogger<HomeController> _logger;
 
         public HomeController(ILogger<HomeController> logger)
@@ -20,17 +24,29 @@ namespace MvcMovie.Controllers
 
         public IActionResult Index()
         {
+            ViewData["year"] = dateYear;
+            ViewData["name"] = name;
+            ViewData["location"] = country;
+
             return View();
         }
 
         public IActionResult Privacy()
         {
+            ViewData["year"] = dateYear;
+            ViewData["name"] = name;
+            ViewData["location"] = country;
+
             return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
+            ViewData["year"] = dateYear;
+            ViewData["name"] = name;
+            ViewData["location"] = country;
+
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }

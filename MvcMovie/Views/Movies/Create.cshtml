@@ -1,16 +1,28 @@
 ﻿@model MvcMovie.Models.Movie
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Add a Church Movie";
+
+    var selectList = new SelectList(
+    new List<SelectListItem>
+    {
+        new SelectListItem {Text = "Comedy", Value = "Comedy"},
+        new SelectListItem {Text = "Drama", Value = "Drama"},
+        new SelectListItem {Text = "Documentary", Value = "Documentary"},
+        new SelectListItem {Text = "Action", Value = "Action"},
+        new SelectListItem {Text = "Adventure", Value = "Adventure"},
+        new SelectListItem {Text = "History", Value = "History"},
+            }, "Value", "Text");
+
 }
 
-<h1>Create</h1>
+<h1>Add a Church Movie</h1>
 
-<h4>Movie</h4>
+
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="Create" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Title" class="control-label"></label>
@@ -22,11 +34,26 @@
                 <input asp-for="ReleaseDate" class="form-control" />
                 <span asp-validation-for="ReleaseDate" class="text-danger"></span>
             </div>
+
+            <!--div class="form-group">
+        <label asp-for="Genre" class="control-label"></label>
+        <select asp-for="ReleaseDate" class="form-control">
+            <option value="Drama">Drama</option>
+            <option value="Comedy">Comedy</option>
+            <option value="Documentary">Documentary</option>
+            <option value="Action">Action</option>
+            <option value="Adventure">Adventure</option>
+            <option value="History">History</option>
+        </select>
+        <span asp-validation-for="Genre" class="text-danger"></span>
+    </div-->
+
             <div class="form-group">
                 <label asp-for="Genre" class="control-label"></label>
-                <input asp-for="Genre" class="form-control" />
+                @Html.DropDownListFor(m => m.Genre, selectList, "", new { @class = "form-control" })
                 <span asp-validation-for="Genre" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="Price" class="control-label"></label>
                 <input asp-for="Price" class="form-control" />
@@ -37,6 +64,13 @@
                 <input asp-for="Rating" class="form-control" />
                 <span asp-validation-for="Rating" class="text-danger"></span>
             </div>
+
+            <div class="form-group">
+                <label asp-for="ImagePath" class="control-label"></label>
+                <input asp-for="ImagePath" type="file" name="ImagePath" />
+                <span asp-validation-for="ImagePath" class="text-danger"></span>
+            </div>
+
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -13,6 +14,9 @@ namespace MvcMovie.Controllers
     public class MoviesController : Controller
     {
         private readonly MvcMovieContext _context;
+        private int dateYear = DateTime.Now.Year;
+        private String name = "Bryan Anderson";
+        private String country = "Brazil";
 
         public MoviesController(MvcMovieContext context)
         {
@@ -20,12 +24,15 @@ namespace MvcMovie.Controllers
         }
 
         // GET: Movies
-        public async Task<IActionResult> Index(string movieGenre, string searchString)
+        public async Task<IActionResult> Index(string movieGenre, string searchString, string sortOrder)
         {
             // Use LINQ to get list of genres.
             IQueryable<string> genreQuery = from m in _context.Movie
                                             orderby m.Genre
                                             select m.Genre;
+
+            // Variable string collected from the page for sorting
+            ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
 
             var movies = from m in _context.Movie
                          select m;
@@ -40,11 +47,27 @@ namespace MvcMovie.Controllers
                 movies = movies.Where(x => x.Genre == movieGenre);
             }
 
+            // Date sorting
+            switch (sortOrder)
+            {
+                case "Date":
+                    movies = movies.OrderBy(d => d.ReleaseDate);
+                    break;
+                case "date_desc":
+                default:
+                    movies = movies.OrderByDescending(d => d.ReleaseDate);
+                    break;
+            }
+
             var movieGenreVM = new MovieGenreViewModel
             {
                 Genres = new SelectList(await genreQuery.Distinct().ToListAsync()),
                 Movies = await movies.ToListAsync()
             };
+
+            ViewData["year"] = dateYear;
+            ViewData["name"] = name;
+            ViewData["location"] = country;
 
             return View(movieGenreVM);
         }
@@ -64,13 +87,22 @@ namespace MvcMovie.Controllers
                 return NotFound();
             }
 
+            ViewData["year"] = dateYear;
+            ViewData["name"] = name;
+            ViewData["location"] = country;
+
             return View(movie);
         }
 
         // GET: Movies/Create
         public IActionResult Create()
         {
-            return View();
+
+            ViewData["year"] = dateYear;
+            ViewData["name"] = name;
+            ViewData["location"] = country;
+
+            return View(new Movie());
         }
 
         // POST: Movies/Create
@@ -78,7 +110,7 @@ namespace MvcMovie.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,ReleaseDate,Genre,Price,Rating")] Movie movie)
+        public async Task<IActionResult> Create([Bind("Id,Title,ReleaseDate,Genre,Price,Rating,ImagePath")] Movie movie)
         {
             if (ModelState.IsValid)
             {
@@ -86,6 +118,11 @@ namespace MvcMovie.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+
+            ViewData["year"] = dateYear;
+            ViewData["name"] = name;
+            ViewData["location"] = country;
+
             return View(movie);
         }
 
@@ -102,6 +139,11 @@ namespace MvcMovie.Controllers
             {
                 return NotFound();
             }
+            
+            ViewData["year"] = dateYear;
+            ViewData["name"] = name;
+            ViewData["location"] = country;
+
             return View(movie);
         }
 
@@ -110,7 +152,7 @@ namespace MvcMovie.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,ReleaseDate,Genre,Price,Rating")] Movie movie)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,ReleaseDate,Genre,Price,Rating,ImagePath")] Movie movie)
         {
             if (id != movie.Id)
             {
@@ -137,6 +179,11 @@ namespace MvcMovie.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+
+            ViewData["year"] = dateYear;
+            ViewData["name"] = name;
+            ViewData["location"] = country;
+
             return View(movie);
         }
 
@@ -154,6 +201,10 @@ namespace MvcMovie.Controllers
             {
                 return NotFound();
             }
+
+            ViewData["year"] = dateYear;
+            ViewData["name"] = name;
+            ViewData["location"] = country;
 
             return View(movie);
         }

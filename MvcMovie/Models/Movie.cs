@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -23,5 +26,9 @@ namespace MvcMovie.Models
 
         [RegularExpression(@"^[A-Z]+[a-zA-Z0-9""'\s-]*$"), StringLength(5)]
         public string Rating { get; set; }
+
+        [Display(Name = "Image Name"), DataType(DataType.Upload)]
+        [/*RegularExpression(@"([a-zA-Z0-9\s_\\.\-\(\):])+(.jpg|.jpeg|.png)$"),*/ Required]
+        public string ImagePath { get; set; }
     }
 }
