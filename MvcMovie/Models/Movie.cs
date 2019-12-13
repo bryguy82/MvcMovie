@@ -28,7 +28,7 @@ namespace MvcMovie.Models
         public string Rating { get; set; }
 
         [Display(Name = "Image Name"), DataType(DataType.Upload)]
-        [/*RegularExpression(@"([a-zA-Z0-9\s_\\.\-\(\):])+(.jpg|.jpeg|.png)$"),*/ Required]
+        [Required]
         public string ImagePath { get; set; }
     }
 }

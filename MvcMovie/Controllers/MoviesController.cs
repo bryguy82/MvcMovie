@@ -102,7 +102,7 @@ namespace MvcMovie.Controllers
             ViewData["name"] = name;
             ViewData["location"] = country;
 
-            return View(new Movie());
+            return View();
         }
 
         // POST: Movies/Create
